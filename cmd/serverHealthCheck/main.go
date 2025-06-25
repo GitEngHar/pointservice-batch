@@ -13,7 +13,7 @@ func main() {
 	mode := os.Getenv("APP_ENV")
 	switch mode {
 	case "aws":
-		handler := lambda_handler.NewHealthCheckHandler()
+		handler := lambda_handler.NewServerHealthCheckHandler()
 		lambda_server_less.NewConfig().
 			Handler(handler).
 			Start()
