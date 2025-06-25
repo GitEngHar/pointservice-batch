@@ -20,5 +20,5 @@ func (c *Config) WebServer(handler Handler) *Config {
 func (c *Config) Start() {
 	e := c.server
 	c.router.Exec()
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(":1324"))
 }
