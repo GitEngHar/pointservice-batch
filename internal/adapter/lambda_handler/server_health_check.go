@@ -21,7 +21,7 @@ func (h *ServerHealthCheckHandler) Handle(ctx context.Context) (events.APIGatewa
 		return events.APIGatewayProxyResponse{
 			StatusCode: 500,
 			Headers:    map[string]string{"Content-Type": "text/plain"},
-			Body:       "",
+			Body:       err.Error(),
 		}, nil
 	}
 	return events.APIGatewayProxyResponse{
