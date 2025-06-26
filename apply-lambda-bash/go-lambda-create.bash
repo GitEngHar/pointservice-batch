@@ -4,4 +4,5 @@ aws lambda create-function \
   --handler bootstrap \
   --zip-file fileb://function.zip \
   --role xxx \
-  --region ap-northeast-1
+  --region ap-northeast-1 \
+  --vpc-config SubnetIds=xxx,xxx,SecurityGroupIds=xxx
