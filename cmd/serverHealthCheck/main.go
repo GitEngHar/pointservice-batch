@@ -16,11 +16,12 @@ func main() {
 		handler := lambda_handler.NewServerHealthCheckHandler()
 		lambda_server_less.NewConfig().
 			Handler(handler).
-			Start()
+			Run()
 	case "local":
 		handler := echo_handler.NewServerHealthCheckHandler()
-		var app = echo_server.NewConfig().WebServer(handler)
-		app.Start()
+		echo_server.NewConfig().
+			Handler(handler).
+			Run()
 	default:
 		log.Fatalf("unsupported APP_ENV: %s", mode)
 	}
