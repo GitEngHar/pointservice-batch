@@ -1,0 +1,1 @@
+docker rmi point-service/batch
