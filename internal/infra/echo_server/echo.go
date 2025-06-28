@@ -11,13 +11,13 @@ func NewConfig() *Config {
 	return &Config{}
 }
 
-func (c *Config) WebServer(handler Handler) *Config {
+func (c *Config) Handler(handler Handler) *Config {
 	c.server = echo.New()
 	c.router = NewRouter(c.server, handler)
 	return c
 }
 
-func (c *Config) Start() {
+func (c *Config) Run() {
 	e := c.server
 	c.router.Exec()
 	e.Logger.Fatal(e.Start(":1324"))

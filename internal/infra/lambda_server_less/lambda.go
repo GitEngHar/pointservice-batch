@@ -24,6 +24,6 @@ func (c *Config) Handler(handler Handler) *Config {
 	return c
 }
 
-func (c *Config) Start() {
+func (c *Config) Run() {
 	lambda.Start(c.handler.Handle)
 }
