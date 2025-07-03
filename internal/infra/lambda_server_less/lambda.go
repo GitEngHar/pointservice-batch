@@ -8,11 +8,16 @@ import (
 
 type Config struct {
 	// 抽象化する
-	handler Handler
+	handler                  Handler
+	apiGatewayRequestHandler ApiGatewayRequestHandler
 }
 
 type Handler interface {
 	Handle(ctx context.Context) (events.APIGatewayProxyResponse, error)
+}
+
+type ApiGatewayRequestHandler interface {
+	Handle(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)
 }
 
 func NewConfig() *Config {
@@ -24,6 +29,15 @@ func (c *Config) Handler(handler Handler) *Config {
 	return c
 }
 
+func (c *Config) ApiGatewayRequestHandler(apiGatewayRequestHandler ApiGatewayRequestHandler) *Config {
+	c.apiGatewayRequestHandler = apiGatewayRequestHandler
+	return c
+}
+
 func (c *Config) Run() {
 	lambda.Start(c.handler.Handle)
+}
+
+func (c *Config) ApiGatewayRequestRun() {
+	lambda.Start(c.apiGatewayRequestHandler.Handle)
 }
